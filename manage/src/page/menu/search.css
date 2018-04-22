@@ -1,0 +1,24 @@
+.searchbox {
+    position: fixed;
+    width: 300px;
+    top: 200px;
+    right: 10px;
+    background: #fff;
+    box-shadow:rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+    border-radius: 5px;
+}
+.searchboxinput {
+    width: 280px;
+    height: 50px;
+    margin: 5px 10px;
+}
+.searchboxbutton {
+    width: 280px;
+    margin: 0px 10px;
+}
+.top {
+    width: 100%;
+    height: 40px;
+    background: rgb(0, 188, 212);
+    box-shadow:rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+}
