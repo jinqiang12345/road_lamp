@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.jin.road.Mapper.LampRecordMapper" > 
+	<select id="findAll" resultType="com.jin.road.Dao.LampRecord">
+        SELECT record.id, record.lampid, lamp.addr, user.name , record.opertimr, record.work
+        FROM record
+        LEFT JOIN user
+        ON record.opercode like user.code
+        Left JOIN lamp
+        ON record.lampid like lamp.lampid
+        ORDER BY record.id DESC
+    </select>
+</mapper>

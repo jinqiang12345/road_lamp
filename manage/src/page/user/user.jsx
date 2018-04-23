@@ -59,6 +59,7 @@ class fixmessage extends Component {
       }
     
       render() {
+        const { login } = this.props;
         return (
           <div className="table">
             <div className="title">用户信息</div>
@@ -87,23 +88,23 @@ class fixmessage extends Component {
               >
                 <TableRow>
                     <TableRowColumn>用户职员代码</TableRowColumn>
-                    <TableRowColumn>101</TableRowColumn>
+                    <TableRowColumn>{login.code}</TableRowColumn>
                 </TableRow>
                 <TableRow>
                     <TableRowColumn>用户姓名</TableRowColumn>
-                    <TableRowColumn>101333</TableRowColumn>
+                    <TableRowColumn>{login.name}</TableRowColumn>
                 </TableRow>  
                 <TableRow>
                     <TableRowColumn>用户联系方式</TableRowColumn>
-                    <TableRowColumn>error</TableRowColumn>
+                    <TableRowColumn>{login.phone}</TableRowColumn>
                 </TableRow>  
                 <TableRow>
                     <TableRowColumn>用户状态</TableRowColumn>
-                    <TableRowColumn>101</TableRowColumn>
+                    <TableRowColumn>{login.state}</TableRowColumn>
                 </TableRow>
                 <TableRow>
                     <TableRowColumn>用户备注</TableRowColumn>
-                    <TableRowColumn>1010325</TableRowColumn>
+                    <TableRowColumn>{login.remark}</TableRowColumn>
                 </TableRow>
               </TableBody>
             </Table>

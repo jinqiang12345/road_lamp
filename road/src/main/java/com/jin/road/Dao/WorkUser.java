@@ -5,7 +5,8 @@ public class WorkUser {
     private String code;
     private String name;
     private String state;
-    private int type;
+    private String phone;
+    private String position;
 
     public int getId() {
         return id;
@@ -26,6 +27,15 @@ public class WorkUser {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
 
     public String getState() {
         return state;
@@ -35,11 +45,11 @@ public class WorkUser {
         this.state = state;
     }
 
-    public int getType() {
-        return type;
+    public String getType() {
+        return position;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setType(String type) {
+        this.position = type;
     }
 }

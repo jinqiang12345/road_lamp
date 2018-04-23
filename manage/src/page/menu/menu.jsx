@@ -46,11 +46,11 @@ class M extends Component {
   state = {
     open: false
   }
-  // componentDidMount() {
-  //   if(this.props.login.logname === undefined) {
-  //     history.push('/');
-  //   }
-  // }
+  componentDidMount() {
+    if(this.props.login.logname === undefined) {
+      history.push('/');
+    }
+  }
   handleToggle = () => this.setState({open: !this.state.open});
 
   handleClose = () => this.setState({open: false});
@@ -71,7 +71,7 @@ class M extends Component {
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
         anchorOrigin={{horizontal: 'right', vertical: 'top'}}
       >
-        <MenuItem primaryText="用户" leftIcon={<PersonAdd />} />
+        <MenuItem primaryText={"用户" + this.props.login.logname} leftIcon={<PersonAdd />} />
         <MenuItem primaryText="详细信息" leftIcon={<RemoveRedEye />} onClick={() => history.push('/user')}/>
         <MenuItem primaryText="修改密码" leftIcon={<ContentLink />} onClick={() => history.push('/changepwd')}/>
         <Divider />

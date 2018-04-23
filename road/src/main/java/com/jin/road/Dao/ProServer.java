@@ -3,6 +3,7 @@ package com.jin.road.Dao;
 public class ProServer {
 
     private int id;
+    private String procode;
     private String name;
     private String addr;
     private String phone;
@@ -11,6 +12,14 @@ public class ProServer {
         return id;
     }
 
+    public String getProcode() {
+    	return procode;
+    }
+    
+    public void setProcode(String code) {
+    	this.procode = code;
+    }
+    
     public String getName() {
         return name;
     }

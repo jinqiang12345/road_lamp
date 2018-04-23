@@ -12,9 +12,9 @@ import java.util.List;
 @Component
 @Mapper
 public interface FixLampMapper {
-    @Select("SELECT ID, LAMPID, ADDR, STATE, ERRORTIME, FIXCODE, FIXNAME FROM LAMP WHERE STATE LIKE 维修 ORDER BY ID DESC")
+ 
     List<FixLamp> finaAll();
 
-    @Update("UPDATE LAMP SET STATE = 正常 WHERE LAMPID = #{lampid}")
+    @Update("UPDATE LAMP SET STATE = '正常' WHERE LAMPID = #{lampid}")
     void fix(@Param("lampid") String lampid);
 }

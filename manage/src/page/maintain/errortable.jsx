@@ -90,7 +90,7 @@ class Errortable extends Component {
         value: 1,
       };
       componentDidMount() {
-        axios.post('/user')
+        axios.post('http://localhost:1111/work')
           .then(function (response) {
             if(response.data.success === true) {
                 this.setState({

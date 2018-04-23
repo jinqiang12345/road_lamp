@@ -77,7 +77,7 @@ import { message } from 'antd';
  
 class Errortable extends Component {
     state = {
-        data: tableData,
+        data: [],
         fixedHeader: true,
         fixedFooter: true,
         stripedRows: true,
@@ -93,9 +93,12 @@ class Errortable extends Component {
         managename: ''
       };
       componentDidMount() {
-        axios.post('/user')
-          .then(function (response) {
-            if(response.data.success === true) {
+        let fd = new FormData();
+        fd.append("position", "管理人员");
+        axios.post('http://localhost:1111/man', fd)
+          .then((response) => {
+
+            if(response.data.success) {
                 this.setState({
                   data: response.data.data
                 })
@@ -168,7 +171,8 @@ class Errortable extends Component {
                 enableSelectAll={this.state.enableSelectAll}
               >
                 <TableRow>
-                <TableHeaderColumn tooltip="设备管理职员代码">职员代码</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="序号">序号</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="设备管理职员代码">职员代码</TableHeaderColumn>
                   <TableHeaderColumn tooltip="设备管理职员姓名">职员姓名</TableHeaderColumn>
                   <TableHeaderColumn tooltip="设备管理人员联系方式">联系方式</TableHeaderColumn>
                   <TableHeaderColumn tooltip="设备管理人员状态">状态</TableHeaderColumn>
@@ -183,9 +187,10 @@ class Errortable extends Component {
                 {this.state.data.map( (row, index) => (
                   <TableRow key={index}>
                     <TableRowColumn>{index}</TableRowColumn>
+                    <TableRowColumn>{row.code}</TableRowColumn>
                     <TableRowColumn>{row.name}</TableRowColumn>
-                    <TableRowColumn>{row.status}</TableRowColumn>
-                    <TableRowColumn>在职</TableRowColumn>
+                    <TableRowColumn>{row.phone}</TableRowColumn>
+                    <TableRowColumn>{row.state}</TableRowColumn>
                   </TableRow>
                   ))}
               </TableBody>
@@ -193,6 +198,7 @@ class Errortable extends Component {
                 adjustForCheckbox={this.state.showCheckboxes}
               >
                 <TableRow>
+                  <TableHeaderColumn>序号</TableHeaderColumn>
                   <TableHeaderColumn>职员代码</TableHeaderColumn>
                   <TableHeaderColumn>职员姓名</TableHeaderColumn>
                   <TableHeaderColumn>联系方式</TableHeaderColumn>

@@ -20,7 +20,6 @@ class Login extends Component {
         rem: false
     }
     componentDidMount() {
-        console.log(cookies.get("roadlogname"))
         this.setState({
             logname: cookies.get("roadlogname") || '',
             pwd: cookies.get("roadpwd") || '',
@@ -31,11 +30,11 @@ class Login extends Component {
         let fd = new FormData();
         fd.append("logname", this.state.logname);
         fd.append("pwd", this.state.pwd);
-        axios.post('/user', fd)
-          .then(function (response) {
-            if(response.data.success === true) {
+        axios.post('http://localhost:1111/login', fd)
+          .then((response) => {
+            if(response.data.success) {
                 this.props.dispatch(login(response.data.data));
-                message.success('欢迎您！' + response.data.data.logname);
+                message.success('欢迎您！' + this.state.logname);
                 if(this.state.rem) {
                     cookies.set("roadlogname", this.state.logname, {maxAge: 30*24*60*60})
                     cookies.set("roadpwd", this.state.pwd, {maxAge: 30*24*60*60})

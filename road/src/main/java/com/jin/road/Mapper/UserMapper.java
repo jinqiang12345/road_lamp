@@ -2,6 +2,9 @@ package com.jin.road.Mapper;
 
 import com.jin.road.Dao.RoadUser;
 import com.jin.road.Dao.WorkUser;
+
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -12,12 +15,14 @@ import org.springframework.stereotype.Component;
 @Mapper
 public interface UserMapper {
 
-    @Select("SELECT * FROM USER WHERE LOGNAME = #{logname}")
     RoadUser findByLogname(@Param("logname") String logname);
 
-    @Update("UPDATE WORKUSER SET STATE = #{state} WHERE code = #{code}")
+    @Update("UPDATE USER SET STATE = #{state} WHERE code LIKE #{code}")
     void fix(@Param("state") String state, @Param("code") String code);
 
-    @Select("SELECT * FROM WORKUSER WHERE TYPE = #{type}")
-    WorkUser findByType(@Param("logname") int type);
+    @Select("SELECT * FROM USER WHERE POSITION LIKE #{position}")
+    List<WorkUser> findByPosition(@Param("position") String position);
+    
+    @Select("SELECT * FROM USER WHERE POSITION LIKE '维修工' AND STATE LIKE '在职'")
+    List<WorkUser> findWork();
 }

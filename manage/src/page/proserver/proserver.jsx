@@ -92,9 +92,9 @@ class Errortable extends Component {
         name: ''
       };
       componentDidMount() {
-        axios.post('/user')
-          .then(function (response) {
-            if(response.data.success === true) {
+        axios.post('http://localhost:1111/proserver')
+          .then((response) => {
+            if(response.data.success) {
                 this.setState({
                   data: response.data.data
                 })
@@ -170,6 +170,7 @@ class Errortable extends Component {
                 enableSelectAll={this.state.enableSelectAll}
               >
                 <TableRow>
+                  <TableHeaderColumn tooltip="序号">序号</TableHeaderColumn>
                   <TableHeaderColumn tooltip="供应商名称">名称</TableHeaderColumn>
                   <TableHeaderColumn tooltip="供应商地址">地址</TableHeaderColumn>
                   <TableHeaderColumn tooltip="供应商联系方式">联系方式</TableHeaderColumn>
@@ -185,7 +186,8 @@ class Errortable extends Component {
                   <TableRow key={index}>
                     <TableRowColumn>{index}</TableRowColumn>
                     <TableRowColumn>{row.name}</TableRowColumn>
-                    <TableRowColumn>{row.status}</TableRowColumn>
+                    <TableRowColumn>{row.addr}</TableRowColumn>
+                    <TableRowColumn>{row.phone}</TableRowColumn>
                   </TableRow>
                   ))}
               </TableBody>
@@ -193,6 +195,7 @@ class Errortable extends Component {
                 adjustForCheckbox={this.state.showCheckboxes}
               >
                 <TableRow>
+                  <TableHeaderColumn>序号</TableHeaderColumn>
                   <TableHeaderColumn>名称</TableHeaderColumn>
                   <TableHeaderColumn>地址</TableHeaderColumn>
                   <TableHeaderColumn>联系方式</TableHeaderColumn>

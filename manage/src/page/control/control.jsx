@@ -22,7 +22,7 @@ var i = 14;
 var c;
 const w = document.documentElement.clientWidth || document.body.clientWidth;
 const h = document.documentElement.clientHeight || document.body.clientHeight;
-class Chart1 extends Component {
+class Control extends Component {
    state = {
      data: data,
      dis: 'block'
@@ -69,4 +69,4 @@ class Chart1 extends Component {
     }
 }
 
-export default Chart1;
+export default Control;

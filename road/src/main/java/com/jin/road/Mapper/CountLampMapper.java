@@ -11,15 +11,15 @@ import java.util.List;
 @Mapper
 public interface CountLampMapper {
 
-    @Select("SELECT COUNT(*) FROM LAMP WHERE STATE LIKE 正常")
+    @Select("SELECT COUNT(*) FROM LAMP WHERE STATE LIKE '正常'")
     int okcount();
 
-    @Select("SELECT COUNT(*) FROM LAMP WHERE STATE LIKE 故障")
+    @Select("SELECT COUNT(*) FROM LAMP WHERE STATE LIKE '故障'")
     int errorcount();
 
-    @Select("SELECT COUNT(*) FROM LAMP WHERE STATE LIKE 维修")
+    @Select("SELECT COUNT(*) FROM LAMP WHERE STATE LIKE '维修'")
     int fixcount();
 
-    @Select("SELECT * FROM RECORD ORDER BY ID DESC LIMIT 5")
+    @Select("SELECT * FROM COUNTRECORD ORDER BY ID DESC LIMIT 6")
     List<Record> getrecord();
 }

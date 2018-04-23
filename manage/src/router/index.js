@@ -4,9 +4,13 @@ import {
   Router,
   Switch
 } from 'react-router';
+import axios from 'axios';
 import history from '../history';
 import M from '../page/menu/menu';
 import L from '../page/login/login';
+
+axios.defaults.headers.common['auth'] = 'road2018';
+axios.defaults.timeout = 3000;
 
 const router = () => (
   <Router history={history}>

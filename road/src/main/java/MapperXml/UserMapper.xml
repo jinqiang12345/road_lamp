@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.jin.road.Mapper.UserMapper" > 
+	<select id="findByLogname" resultType="com.jin.road.Dao.RoadUser">
+        SELECT loguser.id, loguser.logname, loguser.pwd, loguser.code , user.name, user.phone, user.state, user.remark
+        FROM loguser
+        LEFT JOIN user
+        ON loguser.code like user.code
+        WHERE logname like #{logname}
+    </select>
+</mapper>

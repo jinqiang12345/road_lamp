@@ -16,6 +16,6 @@ public interface ErrorLampMapper {
     @Select("SELECT ID, LAMPID, ADDR, STATE, ERRORTIME FROM LAMP WHERE STATE LIKE 故障 ORDER BY ID DESC")
     List<RoadLamp> finaAll();
 
-    @Update("UPDATE LAMP SET STATE = 维修, FIXCODE = #{fixcode}, FIXNAME = #{fixname} WHERE LAMPID = #{lampid}")
-    void getfix(@Param("fixcode") String fixcode, @Param("fixname") String fixname, @Param("lampid") String lampid);
+    @Update("UPDATE LAMP SET STATE = 维修, FIXCODE = #{fixcode} WHERE LAMPID Like #{lampid}")
+    void getfix(@Param("fixcode") String fixcode, @Param("lampid") String lampid);
 }
