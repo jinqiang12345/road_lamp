@@ -10,10 +10,12 @@ const data = [
     {name: '2018-04-26', 故障: 0, 维修中: 20},
     {name: '2018-04-27', 故障: 6, 维修中: 5},
 ];
+const w = document.documentElement.clientWidth || document.body.clientWidth;
+const h = document.documentElement.clientHeight || document.body.clientHeight;
 class Chart1 extends Component {
     render() {
         return (
-            <LineChart width={400} height={270} data={data}>
+            <LineChart width={w * 0.95 * 0.3} height={h * 0.5 - 100} data={data}>
                <XAxis dataKey="name"/>
                <YAxis/>
                <CartesianGrid strokeDasharray="3 3"/>

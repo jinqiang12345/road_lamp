@@ -45,7 +45,7 @@ class Login extends Component {
                     cookies.set("roadpwd", "", {maxAge: 30*24*60*60})
                     cookies.set("roadrem", false, {maxAge: 30*24*60*60})
                 }
-                history.push('/chart')
+                history.push('/control')
             } else {
                 message.error('用户名或密码错误！');
             }

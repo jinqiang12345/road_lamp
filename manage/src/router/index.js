@@ -12,6 +12,7 @@ const router = () => (
   <Router history={history}>
     <Switch>
       <Route exact path="/" component={L} />
+      <Route exact path="/control" component={M} />
       <Route exact path="/chart" component={M} />
       <Route exact path="/errortable" component={M} />
       <Route exact path="/fixtable" component={M} />

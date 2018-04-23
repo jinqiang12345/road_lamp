@@ -26,6 +26,7 @@ import Content from 'material-ui/svg-icons/content/content-paste';
 import Work from 'material-ui/svg-icons/action/work';
 import Perm from 'material-ui/svg-icons/action/perm-identity';
 import Account from 'material-ui/svg-icons/action/supervisor-account';
+import Control from '../control/control';
 import Map from '../map/map';
 import ETable from '../maintain/errortable';
 import RTable from '../record/record';
@@ -96,6 +97,7 @@ class M extends Component {
               open={this.state.open}
               onRequestChange={(open) => this.setState({open})}
             >
+              <MenuItem onClick={() => {history.push('/control');this.setState({open:false})}} leftIcon={<Chart />}>实时监控信息</MenuItem>
               <MenuItem onClick={() => {history.push('/chart');this.setState({open:false})}} leftIcon={<Chart />}>路灯监控信息</MenuItem>
               <MenuItem onClick={() => {history.push('/errortable');this.setState({open:false})}} leftIcon={<Error />}>故障路灯处理</MenuItem>
               <MenuItem onClick={() => {history.push('/fixtable');this.setState({open:false})}} leftIcon={<Build />}>维修任务记录</MenuItem>
@@ -105,6 +107,7 @@ class M extends Component {
               <MenuItem onClick={() => {history.push('/proserver');this.setState({open:false})}} leftIcon={<Account />}>设备供应商信息</MenuItem>
             </Drawer>
             <Switch>
+              <Route exact path="/control" component={Control} />
               <Route exact path="/chart" component={Map} />
               <Route exact path="/errortable" component={ETable} />
               <Route exact path="/fixtable" component={FT} />

@@ -9,7 +9,7 @@ class Search extends Component {
     return (
         <MuiThemeProvider>
             <div className="searchbox animated bounceInRight" style={{display: this.props.search ? 'none' : 'block'}}>
-                <div className="top"></div>
+                <div className="top">搜索</div>
                 {
                    this.props.data.map((d,index) => 
                    <div className="searchboxinput" key={index}>

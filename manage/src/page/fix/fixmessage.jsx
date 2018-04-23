@@ -10,7 +10,6 @@ import {
   } from 'material-ui/Table';
   import RaisedButton from 'material-ui/RaisedButton';
   import './fixtable.css';
-
 class fixmessage extends Component {
     state = {
         fixedHeader: true,

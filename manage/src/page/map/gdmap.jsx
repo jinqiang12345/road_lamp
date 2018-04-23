@@ -9,6 +9,8 @@ const randomMarker = (len) => (
       },
     }))
   );
+const w = document.documentElement.clientWidth || document.body.clientWidth;
+const h = document.documentElement.clientHeight || document.body.clientHeight;
 class GdMap extends Component {
     constructor(){
         super();
@@ -25,7 +27,7 @@ class GdMap extends Component {
       }
     render() {
         return (
-            <div style={{width: '100%', height: '570px'}}>
+            <div style={{width: '100%', height: h - 170 + 'px'}}>
                 <Map amapkey={'b47cad6ea2ab6d5d7aebde791cdaa28f'} plugins={['ToolBar']} center={this.center} zoom={5}>
                     <Markers 
                         markers={this.markers}

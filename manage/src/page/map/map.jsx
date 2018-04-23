@@ -4,6 +4,8 @@ import GdMap from './gdmap'
 import Chart1 from './chart1'
 import Chart2 from './chart2'
 
+const w = document.documentElement.clientWidth || document.body.clientWidth;
+const h = document.documentElement.clientHeight || document.body.clientHeight;
 class Map extends Component {
   render() {
     return (
@@ -19,7 +21,7 @@ class Map extends Component {
             </div>
         </div>
         <div className="box2">
-            <div className="boxtitle" style={{width: '860px'}}>设备分布位置</div>
+    <div className="boxtitle" style={{width: w * 0.95 * 0.68 + 'px'}}>设备分布位置</div>
             <GdMap />
         </div>
      </div>
