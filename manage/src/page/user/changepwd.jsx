@@ -20,17 +20,17 @@ class Changepwd extends Component {
             message.info("确认密码不一致！")
         } else {
             let fd = new FormData();
-            fd.append("id", this.props.login.id);
+            fd.append("logname", this.props.login.logname);
             fd.append("oldpwd", this.state.oldpwd);
             fd.append("newpwd", this.state.newpwd);
-            axios.post('/user', fd)
-            .then(function (response) {
-              if(response.data.success === true) {
-                  message.success('修改状态成功！');
+            axios.post('http://localhost:1111/changepwd', fd)
+            .then((response) => {
+              if(response.data.success) {
+                  message.success('修改密码成功！');
                   this.props.dispatch(loginout());
                   history.push('/')
               } else {
-                  message.error('修改状态失败！');
+                  message.error('修改密码失败！');
               }
             })
             .catch(function (error) {
@@ -74,7 +74,7 @@ class Changepwd extends Component {
                     <br />
                     <br />
                     <div className="button">
-                        <RaisedButton label="修 改" primary="true" style={{width: '100%'}}/>
+                        <RaisedButton label="修 改" primary="true" style={{width: '100%'}} onClick={this.sss}/>
                     </div>
                 </div>
             </div>

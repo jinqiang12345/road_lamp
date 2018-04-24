@@ -14,70 +14,10 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/action/search';
 import axios from 'axios';  
 import { message } from 'antd';
-
-  
-  const tableData = [
-    {
-      name: 'John Smith',
-      status: 'Employed',
-    },
-    {
-      name: 'Randal White',
-      status: 'Unemployed',
-    },
-    {
-      name: 'Stephanie Sanders',
-      status: 'Employed',
-    },
-    {
-      name: 'Steve Brown',
-      status: 'Employed',
-    },
-    {
-      name: 'Joyce Whitten',
-      status: 'Employed',
-    },
-    {
-      name: 'Samuel Roberts',
-      status: 'Employed',
-    },
-    {
-      name: 'Adam Moore',
-      status: 'Employed',
-    },
-    {
-        name: 'John Smith',
-        status: 'Employed',
-      },
-      {
-        name: 'Randal White',
-        status: 'Unemployed',
-      },
-      {
-        name: 'Stephanie Sanders',
-        status: 'Employed',
-      },
-      {
-        name: 'Steve Brown',
-        status: 'Employed',
-      },
-      {
-        name: 'Joyce Whitten',
-        status: 'Employed',
-      },
-      {
-        name: 'Samuel Roberts',
-        status: 'Employed',
-      },
-      {
-        name: 'Adam Moore',
-        status: 'Employed',
-      },
-  ];
   
 class Errortable extends Component {
     state = {
-        data: tableData,
+        data: [],
         fixedHeader: true,
         fixedFooter: true,
         stripedRows: true,
@@ -162,7 +102,6 @@ class Errortable extends Component {
               fixedFooter={this.state.fixedFooter}
               selectable={this.state.selectable}
               multiSelectable={this.state.multiSelectable}
-              onCellClick={(rowNumber) => console.log(tableData[rowNumber])}
             >
               <TableHeader
                 displaySelectAll={this.state.showCheckboxes}

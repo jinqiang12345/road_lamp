@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
-import './control.css'
+import './control.css';
+import moment from 'moment';
 
 const data = [
   {name: 'Page 1', uv: 4000, pv: 2400, amt: 2400},
@@ -37,7 +38,7 @@ class Control extends Component {
      let d = this.state.data;
      d.shift();
      d.push({
-       name : 'page' + i,
+       name : moment().format('HH:mm:ss').toString(),
        uv: 2000 + Math.floor(Math.random()*2000),
        pv: 2000 + Math.floor(Math.random()*2000),
        amt: 2000 + Math.floor(Math.random()*1000)

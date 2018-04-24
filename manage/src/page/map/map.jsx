@@ -5,7 +5,6 @@ import Chart1 from './chart1'
 import Chart2 from './chart2'
 
 const w = document.documentElement.clientWidth || document.body.clientWidth;
-const h = document.documentElement.clientHeight || document.body.clientHeight;
 class Map extends Component {
   render() {
     return (

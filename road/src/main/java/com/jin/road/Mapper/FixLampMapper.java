@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper
 public interface FixLampMapper {
  
-    List<FixLamp> finaAll();
+    List<FixLamp> findAllFix();
 
     @Update("UPDATE LAMP SET STATE = '正常' WHERE LAMPID = #{lampid}")
     void fix(@Param("lampid") String lampid);

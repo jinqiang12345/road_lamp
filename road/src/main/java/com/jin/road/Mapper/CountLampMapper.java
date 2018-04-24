@@ -19,7 +19,7 @@ public interface CountLampMapper {
 
     @Select("SELECT COUNT(*) FROM LAMP WHERE STATE LIKE '维修'")
     int fixcount();
-
+    
     @Select("SELECT * FROM COUNTRECORD ORDER BY ID DESC LIMIT 6")
     List<Record> getrecord();
 }

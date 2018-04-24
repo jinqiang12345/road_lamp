@@ -7,7 +7,7 @@ public class LampRecord {
     private String addr;
     private String opercode;
     private String opername;
-    private String state;
+    private String work;
     private String time;
 
     public int getId() {
@@ -46,12 +46,12 @@ public class LampRecord {
         this.opername = opername;
     }
 
-    public String getState() {
-        return state;
+    public String getWork() {
+        return work;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setWork(String state) {
+        this.work = state;
     }
 
     public String getTime() {

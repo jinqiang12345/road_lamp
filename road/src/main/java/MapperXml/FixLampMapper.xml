@@ -2,12 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.jin.road.Mapper.FixLampMapper" > 
-	<select id="findAll" resultType="com.jin.road.Dao.FixLamp">
-        SELECT lamp.id, lamp.lampid, lamp.addr, lamp.state , lamp.procode, lamp.fixcode, lamp.errortime, user.name, 
-        user.phone, user.state, user.remark
+	<select id="findAllFix" resultType="com.jin.road.Dao.FixLamp">
+        SELECT lamp.id, lamp.lampid, lamp.addr, lamp.state, lamp.fixcode, lamp.errortime, user.name AS fixname, 
+        proserver.name AS proname
         FROM lamp
         LEFT JOIN user
         ON lamp.fixcode like user.code
-        WHERE state like '维修'
+        LEFT JOIN proserver
+        ON lamp.procode like proserver.procode
+        WHERE lamp.state like '维修'
+        ORDER BY lamp.errortime DESC
     </select>
 </mapper>

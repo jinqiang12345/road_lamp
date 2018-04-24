@@ -15,68 +15,9 @@ import { error } from '../../actions';
 import axios from 'axios';  
 import { message } from 'antd';
 
-  
-  const tableData = [
-    {
-      name: 'John Smith',
-      status: 'Employed',
-    },
-    {
-      name: 'Randal White',
-      status: 'Unemployed',
-    },
-    {
-      name: 'Stephanie Sanders',
-      status: 'Employed',
-    },
-    {
-      name: 'Steve Brown',
-      status: 'Employed',
-    },
-    {
-      name: 'Joyce Whitten',
-      status: 'Employed',
-    },
-    {
-      name: 'Samuel Roberts',
-      status: 'Employed',
-    },
-    {
-      name: 'Adam Moore',
-      status: 'Employed',
-    },
-    {
-        name: 'John Smith',
-        status: 'Employed',
-      },
-      {
-        name: 'Randal White',
-        status: 'Unemployed',
-      },
-      {
-        name: 'Stephanie Sanders',
-        status: 'Employed',
-      },
-      {
-        name: 'Steve Brown',
-        status: 'Employed',
-      },
-      {
-        name: 'Joyce Whitten',
-        status: 'Employed',
-      },
-      {
-        name: 'Samuel Roberts',
-        status: 'Employed',
-      },
-      {
-        name: 'Adam Moore',
-        status: 'Employed',
-      },
-  ];
 class Errortable extends Component {
     state = {
-        data: tableData,
+        data: [],
         fixedHeader: true,
         fixedFooter: true,
         stripedRows: true,
@@ -90,8 +31,8 @@ class Errortable extends Component {
         value: 1,
       };
       componentDidMount() {
-        axios.post('http://localhost:1111/work')
-          .then(function (response) {
+        axios.post('http://localhost:1111/errorlamp')
+          .then((response) => {
             if(response.data.success === true) {
                 this.setState({
                   data: response.data.data
@@ -124,9 +65,11 @@ class Errortable extends Component {
                 enableSelectAll={this.state.enableSelectAll}
               >
                 <TableRow>
+                  <TableHeaderColumn tooltip="序号">序号</TableHeaderColumn>
                   <TableHeaderColumn tooltip="设备ID">设备ID</TableHeaderColumn>
                   <TableHeaderColumn tooltip="设备安装地址">安装地址</TableHeaderColumn>
                   <TableHeaderColumn tooltip="设备运行状态">运行状态</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="故障时间">故障时间</TableHeaderColumn>
                 </TableRow>
               </TableHeader>
               <TableBody
@@ -138,8 +81,10 @@ class Errortable extends Component {
                 {this.state.data.map( (row, index) => (
                   <TableRow key={index}>
                     <TableRowColumn>{index}</TableRowColumn>
-                    <TableRowColumn>{row.name}</TableRowColumn>
-                    <TableRowColumn>{row.status}</TableRowColumn>
+                    <TableRowColumn>{row.lampid}</TableRowColumn>
+                    <TableRowColumn>{row.addr}</TableRowColumn>
+                    <TableRowColumn>{row.state}</TableRowColumn>
+                    <TableRowColumn>{row.errortime}</TableRowColumn>
                   </TableRow>
                   ))}
               </TableBody>
@@ -147,9 +92,11 @@ class Errortable extends Component {
                 adjustForCheckbox={this.state.showCheckboxes}
               >
                 <TableRow>
-                <TableHeaderColumn>设备ID</TableHeaderColumn>
+                  <TableHeaderColumn>序号</TableHeaderColumn>
+                  <TableHeaderColumn>设备ID</TableHeaderColumn>
                   <TableHeaderColumn>安装地址</TableHeaderColumn>
                   <TableHeaderColumn>运行状态</TableHeaderColumn>
+                  <TableHeaderColumn>故障时间</TableHeaderColumn>
                 </TableRow>
               </TableFooter>
             </Table>

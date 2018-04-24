@@ -17,6 +17,12 @@ public interface UserMapper {
 
     RoadUser findByLogname(@Param("logname") String logname);
 
+    @Update("UPDATE LOGUSER SET pwd = #{pwd} WHERE logname LIKE #{logname}")
+    void changepwd(@Param("pwd") String pwd, @Param("logname") String logname);
+    
+    @Update("UPDATE USER SET state = #{state} WHERE code LIKE #{code}")
+    void changestate(@Param("state") String state, @Param("code") String code);
+    
     @Update("UPDATE USER SET STATE = #{state} WHERE code LIKE #{code}")
     void fix(@Param("state") String state, @Param("code") String code);
 

@@ -5,6 +5,7 @@ public class Record {
     private int id;
     private int error;
     private int fix;
+    private int ok;
     private String time;
 
     public int getId() {

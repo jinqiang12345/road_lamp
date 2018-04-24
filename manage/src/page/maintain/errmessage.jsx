@@ -12,9 +12,13 @@ import {
   import SelectField from 'material-ui/SelectField';
   import RaisedButton from 'material-ui/RaisedButton';
   import './errortable.css';
+  import history from '../../history'
+  import axios from 'axios'; 
+  import { message } from 'antd';
 
 class errmessage extends Component {
     state = {
+        worklist: [],
         fixedHeader: true,
         fixedFooter: false,
         stripedRows: true,
@@ -27,9 +31,49 @@ class errmessage extends Component {
         height: '300px',
         value: 1
       };
+      componentDidMount() {
+        axios.post('http://localhost:1111/workman')
+          .then((response) => {
+            if(response.data.success === true) {
+                this.setState({
+                  worklist: response.data.data
+                })
+            } else {
+                message.error('获取数据失败！');
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+            message.error('网络连接失败！');
+          });
+      }
       handleChange = (event, index, value) => this.setState({value});
+
+      setfix = () => {
+        if(this.state.value !== 1) {
+          let fd = new FormData();
+          fd.append("lampid", this.props.error.lampid);
+          fd.append("opercode", this.props.login.code);
+          fd.append("errortime", this.props.error.errortime);
+          fd.append("fixcode", this.state.value)
+          axios.post('http://localhost:1111/report', fd)
+            .then((response) => {
+              if(response.data.success === true) {
+                  message.error('申请维修成功！');
+                  history.goBack();
+              } else {
+                  message.error('申请维修失败！');
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+              message.error('网络连接失败！');
+            });
+        }
+      }
     
       render() {
+        const { error } = this.props;
         return (
           <div className="table">
             <div className="title">故障路灯信息</div>
@@ -58,23 +102,23 @@ class errmessage extends Component {
               >
                 <TableRow>
                     <TableRowColumn>设备ID</TableRowColumn>
-                    <TableRowColumn>101</TableRowColumn>
+                    <TableRowColumn>{error.lampid}</TableRowColumn>
                 </TableRow>
                 <TableRow>
                     <TableRowColumn>设备安装地址</TableRowColumn>
-                    <TableRowColumn>101333</TableRowColumn>
+                    <TableRowColumn>{error.addr}</TableRowColumn>
                 </TableRow>  
                 <TableRow>
                     <TableRowColumn>状态</TableRowColumn>
-                    <TableRowColumn>error</TableRowColumn>
+                    <TableRowColumn>{error.state}</TableRowColumn>
                 </TableRow>  
                 <TableRow>
                     <TableRowColumn>设备供应商</TableRowColumn>
-                    <TableRowColumn>101</TableRowColumn>
+                    <TableRowColumn>{error.proname}</TableRowColumn>
                 </TableRow>
                 <TableRow>
                     <TableRowColumn>故障时间</TableRowColumn>
-                    <TableRowColumn>1010325</TableRowColumn>
+                    <TableRowColumn>{error.errortime}</TableRowColumn>
                 </TableRow>    
               </TableBody>
             </Table>
@@ -86,12 +130,11 @@ class errmessage extends Component {
                     style={{position: 'absolute', right: '120px'}}
                 >
                     <MenuItem value={1} primaryText="请选择" />
-                    <MenuItem value={2} primaryText="李大嘴" />
-                    <MenuItem value={3} primaryText="李大嘴" />
-                    <MenuItem value={4} primaryText="李大嘴" />
-                    <MenuItem value={5} primaryText="李大嘴" />
+                    {this.state.worklist.map((l, index) => 
+                      <MenuItem value={l.code} primaryText={l.name} />
+                    )}
                 </SelectField>
-                <RaisedButton label="报告维修" primary={true} style={{position: 'absolute', top: '30px', right: '10px'}}/>
+                <RaisedButton label="报告维修" primary={true} style={{position: 'absolute', top: '30px', right: '10px'}} onClick={this.setfix}/>
             </div>
           </div>
         );
@@ -100,7 +143,8 @@ class errmessage extends Component {
 
 function select(state) {
   return {
-    error: state.error
+    error: state.error,
+    login: state.login
   }
 }
 export default connect(select)(errmessage);

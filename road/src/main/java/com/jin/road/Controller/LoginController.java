@@ -33,4 +33,27 @@ public class LoginController {
         }    
         return map;
     }
+    
+    @Auth
+    @RequestMapping(value = "/changepwd", method = RequestMethod.POST)
+    public Map<String, Object> changepwd(@RequestParam String logname, @RequestParam String oldpwd, @RequestParam String newpwd) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        RoadUser roaduser = userMapper.findByLogname(logname);
+        if(oldpwd.equals(roaduser.getPwd())) {
+        	userMapper.changepwd(newpwd, logname);
+            map.put("success", true);
+        } else {
+            map.put("success", false);
+        }    
+        return map;
+    }
+    
+    @Auth
+    @RequestMapping(value = "/changestate", method = RequestMethod.POST)
+    public Map<String, Object> changestate(@RequestParam String state, @RequestParam String code) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        userMapper.changestate(state, code);
+        map.put("success", true);
+        return map;
+    }
 }

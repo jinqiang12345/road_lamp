@@ -35,18 +35,18 @@ public class ErrorLampController {
     public Map<String, Object> errorlamp() throws Exception {
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
-        map.put("data", errorLampMapper.finaAll());
+        map.put("data", errorLampMapper.findAllErrorLamp());
         return map;
     }
     
     @Auth
     @Transactional
     @RequestMapping(value = "/report", method = RequestMethod.POST)
-    public Map<String, Object> fix(@RequestParam String lampid, @RequestParam String fixcode) throws Exception {
+    public Map<String, Object> fix(@RequestParam String lampid, @RequestParam String fixcode, @RequestParam String opercode, @RequestParam String errortime) throws Exception {
     	errorLampMapper.getfix(fixcode, lampid);
     	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
     	String date = df.format(new Date());
-    	lampRecordMapper.record(lampid, fixcode, date, "处理");
+    	lampRecordMapper.record(lampid, opercode, errortime, date, "处理");
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
         return map;

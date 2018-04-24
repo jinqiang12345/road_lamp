@@ -15,66 +15,6 @@ import ContentAdd from 'material-ui/svg-icons/action/search';
 import axios from 'axios';  
 import { message } from 'antd';
 
-  
-  const tableData = [
-    {
-      name: 'John Smith',
-      status: 'Employed',
-    },
-    {
-      name: 'Randal White',
-      status: 'Unemployed',
-    },
-    {
-      name: 'Stephanie Sanders',
-      status: 'Employed',
-    },
-    {
-      name: 'Steve Brown',
-      status: 'Employed',
-    },
-    {
-      name: 'Joyce Whitten',
-      status: 'Employed',
-    },
-    {
-      name: 'Samuel Roberts',
-      status: 'Employed',
-    },
-    {
-      name: 'Adam Moore',
-      status: 'Employed',
-    },
-    {
-        name: 'John Smith',
-        status: 'Employed',
-      },
-      {
-        name: 'Randal White',
-        status: 'Unemployed',
-      },
-      {
-        name: 'Stephanie Sanders',
-        status: 'Employed',
-      },
-      {
-        name: 'Steve Brown',
-        status: 'Employed',
-      },
-      {
-        name: 'Joyce Whitten',
-        status: 'Employed',
-      },
-      {
-        name: 'Samuel Roberts',
-        status: 'Employed',
-      },
-      {
-        name: 'Adam Moore',
-        status: 'Employed',
-      },
-  ];
- 
 class Errortable extends Component {
     state = {
         data: [],
@@ -89,8 +29,8 @@ class Errortable extends Component {
         showCheckboxes: false,
         height: '500px',
         search: true,
-        managecode: '',
-        managename: ''
+        code: '',
+        name: ''
       };
       componentDidMount() {
         let fd = new FormData();
@@ -118,11 +58,11 @@ class Errortable extends Component {
       };
       sss = () => {
         let d = this.state.data;
-        if(this.state.managecode !== '') {
-          d = d.filter(t => t.name === this.state.managecode)
+        if(this.state.code !== '') {
+          d = d.filter(t => t.code === this.state.code)
         }
-        if(this.state.managename !== '') {
-          d = d.filter(t => t.status === this.state.managename)
+        if(this.state.name !== '') {
+          d = d.filter(t => t.name === this.state.name)
         }
         this.setState({
           search: true,
@@ -140,12 +80,12 @@ class Errortable extends Component {
           {
             text1: '请输入管理职员代码',
             text2: '管理职员代码',
-            change: (e) => this.setState({managecode:e.target.value})
+            change: (e) => this.setState({code:e.target.value})
           },
           {
             text1: '请输入管理职员姓名',
             text2: '管理职员姓名',
-            change: (e) => this.setState({managename:e.target.value})
+            change: (e) => this.setState({name:e.target.value})
           },
         ];
         return (
@@ -163,7 +103,6 @@ class Errortable extends Component {
               fixedFooter={this.state.fixedFooter}
               selectable={this.state.selectable}
               multiSelectable={this.state.multiSelectable}
-              onCellClick={(rowNumber) => console.log(tableData[rowNumber])}
             >
               <TableHeader
                 displaySelectAll={this.state.showCheckboxes}

@@ -16,6 +16,6 @@ public interface LampRecordMapper {
 
     List<LampRecord> findAll();
     
-    @Insert("INSERT INTO RECORD(LAMPID, OPERCODE, TIME, WORK) VALUES(#{lampid,jdbcType=VARCHAR}, #{opercode,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}), #{work,jdbcType=VARCHAR})")
-    void record(@Param("lampid") String lampid, @Param("opercode") String code, @Param("time") String time, @Param("work") String work);
+    @Insert("INSERT INTO RECORD(LAMPID, OPERCODE, ERRORTIME, OPERTIME, WORK) VALUES(#{lampid,jdbcType=VARCHAR}, #{opercode,jdbcType=VARCHAR}, #{errortime,jdbcType=VARCHAR}, #{opertime,jdbcType=VARCHAR}, #{work,jdbcType=VARCHAR})")
+    void record(@Param("lampid") String lampid, @Param("opercode") String code, @Param("errortime") String errortime, @Param("opertime") String opertime, @Param("work") String work);
 }

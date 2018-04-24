@@ -24,5 +24,13 @@ public class RoadWorkController {
 		map.put("data", userMapper.findByPosition(position));
 		return map;
 	}
+	
+	@RequestMapping(value = "/workman", method = RequestMethod.POST)
+	public Map<String, Object> workman() throws Exception{
+		Map<String, Object> map = new HashMap<>();
+		map.put("success", true);
+		map.put("data", userMapper.findWork());
+		return map;
+	}
 
 }

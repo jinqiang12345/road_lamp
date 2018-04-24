@@ -21,12 +21,13 @@ class fixmessage extends Component {
         enableSelectAll: false,
         deselectOnClickaway: false,
         showCheckboxes: false,
-        height: '430px',
+        height: '410px',
         value: 1
       };
       handleChange = (event, index, value) => this.setState({value});
     
       render() {
+        const { fix } = this.props;
         return (
           <div className="table">
             <div className="title">故障路灯信息</div>
@@ -55,36 +56,32 @@ class fixmessage extends Component {
               >
                 <TableRow>
                     <TableRowColumn>设备ID</TableRowColumn>
-                    <TableRowColumn>101</TableRowColumn>
+                    <TableRowColumn>{fix.lampid}</TableRowColumn>
                 </TableRow>
                 <TableRow>
                     <TableRowColumn>设备安装地址</TableRowColumn>
-                    <TableRowColumn>101333</TableRowColumn>
+                    <TableRowColumn>{fix.addr}</TableRowColumn>
                 </TableRow>  
                 <TableRow>
                     <TableRowColumn>状态</TableRowColumn>
-                    <TableRowColumn>error</TableRowColumn>
+                    <TableRowColumn>{fix.state}</TableRowColumn>
                 </TableRow>  
                 <TableRow>
                     <TableRowColumn>设备供应商</TableRowColumn>
-                    <TableRowColumn>101</TableRowColumn>
+                    <TableRowColumn>{fix.proname}</TableRowColumn>
                 </TableRow>
                 <TableRow>
                     <TableRowColumn>故障时间</TableRowColumn>
-                    <TableRowColumn>1010325</TableRowColumn>
+                    <TableRowColumn>{fix.errortime}</TableRowColumn>
                 </TableRow>
                 <TableRow>
                     <TableRowColumn>维修职员代码</TableRowColumn>
-                    <TableRowColumn>1010325</TableRowColumn>
+                    <TableRowColumn>{fix.fixcode}</TableRowColumn>
                 </TableRow>
                 <TableRow>
                     <TableRowColumn>维修职员姓名</TableRowColumn>
-                    <TableRowColumn>1010325</TableRowColumn>
-                </TableRow> 
-                <TableRow>
-                    <TableRowColumn>故障原因</TableRowColumn>
-                    <TableRowColumn>error</TableRowColumn>
-                </TableRow>      
+                    <TableRowColumn>{fix.fixname}</TableRowColumn>
+                </TableRow>   
               </TableBody>
             </Table>
             <div style={{position: 'relative', width: '100%', height: '80px'}}>

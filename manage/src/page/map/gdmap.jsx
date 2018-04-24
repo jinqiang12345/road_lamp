@@ -9,7 +9,6 @@ const randomMarker = (len) => (
       },
     }))
   );
-const w = document.documentElement.clientWidth || document.body.clientWidth;
 const h = document.documentElement.clientHeight || document.body.clientHeight;
 class GdMap extends Component {
     constructor(){

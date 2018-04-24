@@ -4,12 +4,11 @@ public class FixLamp {
     private int id;
     private String lampid;
     private String addr;
-    private String psname;
+    private String proname;
     private String state;
     private String errortime;
     private String fixcode;
     private String fixname;
-    private String reason;
 
     public int getId() {
         return id;
@@ -31,13 +30,7 @@ public class FixLamp {
         this.addr = addr;
     }
 
-    public String getPsname() {
-        return psname;
-    }
 
-    public void setPsname(String psname) {
-        this.psname = psname;
-    }
 
     public String getState() {
         return state;
@@ -71,11 +64,11 @@ public class FixLamp {
         this.fixname = fixname;
     }
 
-    public String getReason() {
-        return reason;
-    }
+	public String getProname() {
+		return proname;
+	}
 
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
+	public void setProname(String proname) {
+		this.proname = proname;
+	}
 }

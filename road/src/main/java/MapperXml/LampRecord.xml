@@ -3,7 +3,7 @@
  
 <mapper namespace="com.jin.road.Mapper.LampRecordMapper" > 
 	<select id="findAll" resultType="com.jin.road.Dao.LampRecord">
-        SELECT record.id, record.lampid, lamp.addr, user.name , record.opertimr, record.work
+        SELECT record.id, record.lampid, lamp.addr, record.opercode, user.name AS opername , record.opertime AS time, record.work
         FROM record
         LEFT JOIN user
         ON record.opercode like user.code

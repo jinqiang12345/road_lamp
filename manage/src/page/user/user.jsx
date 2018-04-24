@@ -14,6 +14,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import './user.css';
 import axios from 'axios';  
 import { message } from 'antd';
+import { login } from '../../actions';
+import history from '../../history';
 
 class fixmessage extends Component {
     state = {
@@ -36,17 +38,21 @@ class fixmessage extends Component {
           message.info('请选择修改状态！');
         } else {
           let fd = new FormData();
-          fd.append("id", this.props.login.id);
+          fd.append("code", this.props.login.code);
+          let temp = '';
           if(this.state.value === 2) {
-            fd.append("state", "在职");
+            temp = '在职';
           }
           if(this.state.value === 3) {
-            fd.append("state", "休假");
+            temp = '休假';
           }
-          axios.post('/user', fd)
-            .then(function (response) {
-              if(response.data.success === true) {
+          fd.append("state", temp);
+          axios.post('http://localhost:1111/changestate', fd)
+            .then((response) => {
+              if(response.data.success) {
                   message.success('修改状态成功！');
+                  this.props.dispatch(login({...this.props.login, state: temp}));
+                  history.goBack();
               } else {
                   message.error('修改状态失败！');
               }
@@ -119,7 +125,7 @@ class fixmessage extends Component {
                     <MenuItem value={2} primaryText="在职" />
                     <MenuItem value={3} primaryText="休假" />
                 </SelectField>
-                <RaisedButton label="修改状态" primary={true} style={{position: 'absolute', top: '30px', right: '10px'}}/>
+                <RaisedButton label="修改状态" primary={true} style={{position: 'absolute', top: '30px', right: '10px'}} onClick={this.sss}/>
             </div>
           </div>
         );

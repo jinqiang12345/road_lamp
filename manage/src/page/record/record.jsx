@@ -15,69 +15,9 @@ import S from '../menu/search';
 import axios from 'axios';  
 import { message } from 'antd';
 
-  
-  const tableData = [
-    {
-      name: 'John Smith',
-      status: 'Employed',
-    },
-    {
-      name: 'Randal White',
-      status: 'Unemployed',
-    },
-    {
-      name: 'Stephanie Sanders',
-      status: 'Employed',
-    },
-    {
-      name: 'Steve Brown',
-      status: 'Employed',
-    },
-    {
-      name: 'Joyce Whitten',
-      status: 'Employed',
-    },
-    {
-      name: 'Samuel Roberts',
-      status: 'Employed',
-    },
-    {
-      name: 'Adam Moore',
-      status: 'Employed',
-    },
-    {
-        name: 'John Smith',
-        status: 'Employed',
-      },
-      {
-        name: 'Randal White',
-        status: 'Unemployed',
-      },
-      {
-        name: 'Stephanie Sanders',
-        status: 'Employed',
-      },
-      {
-        name: 'Steve Brown',
-        status: 'Employed',
-      },
-      {
-        name: 'Joyce Whitten',
-        status: 'Employed',
-      },
-      {
-        name: 'Samuel Roberts',
-        status: 'Employed',
-      },
-      {
-        name: 'Adam Moore',
-        status: 'Employed',
-      },
-  ];
-  
 class Errortable extends Component {
     state = {
-        data: tableData,
+        data: [],
         fixedHeader: true,
         fixedFooter: true,
         stripedRows: true,
@@ -89,13 +29,13 @@ class Errortable extends Component {
         showCheckboxes: false,
         height: '500px',
         search: true,
-        id: '',
+        lampid: '',
         opercode: '',
         opername: ''
       };
       componentDidMount() {
-        axios.post('/user')
-          .then(function (response) {
+        axios.post('http://localhost:1111/lamprecord')
+          .then((response) => {
             if(response.data.success === true) {
                 this.setState({
                   data: response.data.data
@@ -116,14 +56,14 @@ class Errortable extends Component {
       };
       sss = () => {
         let d = this.state.data;
-        if(this.state.id !== '') {
-          d = d.filter(t => t.id === this.state.id)
+        if(this.state.lampid !== '') {
+          d = d.filter(t => t.lampid === this.state.lampid)
         }
         if(this.state.opercode !== '') {
-          d = d.filter(t => t.name === this.state.opercode)
+          d = d.filter(t => t.opercode === this.state.opercode)
         }
         if(this.state.opername !== '') {
-          d = d.filter(t => t.status === this.state.opername)
+          d = d.filter(t => t.opername === this.state.opername)
         }
         this.setState({
           search: true,
@@ -141,7 +81,7 @@ class Errortable extends Component {
           {
             text1: '请输入设备ID',
             text2: '设备ID',
-            change: (e) => this.setState({id:e.target.value})
+            change: (e) => this.setState({lampid:e.target.value})
           },
           {
             text1: '请输入操作人职员代码',
@@ -169,7 +109,6 @@ class Errortable extends Component {
               fixedFooter={this.state.fixedFooter}
               selectable={this.state.selectable}
               multiSelectable={this.state.multiSelectable}
-              onCellClick={(rowNumber) => console.log(tableData[rowNumber])}
             >
               <TableHeader
                 displaySelectAll={this.state.showCheckboxes}
@@ -177,11 +116,13 @@ class Errortable extends Component {
                 enableSelectAll={this.state.enableSelectAll}
               >
                 <TableRow>
+                  <TableHeaderColumn tooltip="序号">序号</TableHeaderColumn>
                   <TableHeaderColumn tooltip="设备ID">设备ID</TableHeaderColumn>
                   <TableHeaderColumn tooltip="设备地址">设备地址</TableHeaderColumn>
                   <TableHeaderColumn tooltip="操作人职员代码">操作人职员代码</TableHeaderColumn>
                   <TableHeaderColumn tooltip="操作人姓名">操作人姓名</TableHeaderColumn>
                   <TableHeaderColumn tooltip="状态">状态</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="操作时间">操作时间</TableHeaderColumn>
                 </TableRow>
               </TableHeader>
               <TableBody
@@ -193,10 +134,12 @@ class Errortable extends Component {
                 {this.state.data.map( (row, index) => (
                   <TableRow key={index}>
                     <TableRowColumn>{index}</TableRowColumn>
-                    <TableRowColumn>{row.name}</TableRowColumn>
-                    <TableRowColumn>{row.status}</TableRowColumn>
-                    <TableRowColumn>dsdasasd</TableRowColumn>
-                    <TableRowColumn>已处理</TableRowColumn>
+                    <TableRowColumn>{row.lampid}</TableRowColumn>
+                    <TableRowColumn>{row.addr}</TableRowColumn>
+                    <TableRowColumn>{row.opercode}</TableRowColumn>
+                    <TableRowColumn>{row.opername}</TableRowColumn>
+                    <TableRowColumn>{row.work}</TableRowColumn>
+                    <TableRowColumn>{row.time}</TableRowColumn>
                   </TableRow>
                   ))}
               </TableBody>
@@ -204,11 +147,13 @@ class Errortable extends Component {
                 adjustForCheckbox={this.state.showCheckboxes}
               >
                 <TableRow>
-                <TableHeaderColumn>设备ID</TableHeaderColumn>
+                  <TableHeaderColumn>序号</TableHeaderColumn>
+                  <TableHeaderColumn>设备ID</TableHeaderColumn>
                   <TableHeaderColumn>设备地址</TableHeaderColumn>
                   <TableHeaderColumn>操作人职员代码</TableHeaderColumn>
                   <TableHeaderColumn>操作人姓名</TableHeaderColumn>
                   <TableHeaderColumn>状态</TableHeaderColumn>
+                  <TableHeaderColumn>操作时间</TableHeaderColumn>
                 </TableRow>
               </TableFooter>
             </Table>
