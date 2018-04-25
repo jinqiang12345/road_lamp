@@ -1526,3 +1526,7 @@
 2018-04-25 15:04:22,588 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT lamp.id, lamp.lampid, lamp.addr, lamp.state, lamp.fixcode, lamp.errortime, user.name AS fixname, proserver.name AS proname FROM lamp LEFT JOIN user ON lamp.fixcode like user.code LEFT JOIN proserver ON lamp.procode like proserver.procode WHERE lamp.state like '维修' ORDER BY lamp.errortime DESC 
 2018-04-25 15:04:22,592 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 
 2018-04-25 15:04:22,594 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2018-04-25 15:56:21,276 INFO (StartupInfoLogger.java:50)- Starting RoadApplication on DESKTOP-5ITJ2K7 with PID 3724 (started by jinqiang in C:\新建文件夹\road_lamp\road)
+2018-04-25 15:56:21,278 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.0.1.RELEASE, Spring v5.0.5.RELEASE
+2018-04-25 15:56:21,279 INFO (SpringApplication.java:659)- No active profile set, falling back to default profiles: default
+2018-04-25 15:56:22,776 INFO (StartupInfoLogger.java:59)- Started RoadApplication in 1.69 seconds (JVM running for 2.025)
