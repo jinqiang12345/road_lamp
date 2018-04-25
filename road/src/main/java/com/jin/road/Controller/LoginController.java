@@ -35,12 +35,41 @@ public class LoginController {
     }
     
     @Auth
+    @RequestMapping(value = "/loginwork", method = RequestMethod.POST)
+    public Map<String, Object> loginwork(@RequestParam String logname, @RequestParam String pwd) throws Exception {
+    	System.err.println(logname);
+        Map<String, Object> map = new HashMap<>();
+        RoadUser roaduser = userMapper.findWorkByLogname(logname);
+        if(pwd.equals(roaduser.getPwd())) {
+            map.put("success", true);
+            map.put("data", roaduser);
+        } else {
+            map.put("success", false);
+        }    
+        return map;
+    }
+    
+    @Auth
     @RequestMapping(value = "/changepwd", method = RequestMethod.POST)
     public Map<String, Object> changepwd(@RequestParam String logname, @RequestParam String oldpwd, @RequestParam String newpwd) throws Exception {
         Map<String, Object> map = new HashMap<>();
         RoadUser roaduser = userMapper.findByLogname(logname);
         if(oldpwd.equals(roaduser.getPwd())) {
         	userMapper.changepwd(newpwd, logname);
+            map.put("success", true);
+        } else {
+            map.put("success", false);
+        }    
+        return map;
+    }
+    
+    @Auth
+    @RequestMapping(value = "/changeworkpwd", method = RequestMethod.POST)
+    public Map<String, Object> changeworkpwd(@RequestParam String logname, @RequestParam String oldpwd, @RequestParam String newpwd) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        RoadUser roaduser = userMapper.findWorkByLogname(logname);
+        if(oldpwd.equals(roaduser.getPwd())) {
+        	userMapper.changeworkpwd(newpwd, logname);
             map.put("success", true);
         } else {
             map.put("success", false);

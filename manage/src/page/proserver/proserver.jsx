@@ -31,7 +31,7 @@ class Errortable extends Component {
         search: true,
         name: ''
       };
-      componentDidMount() {
+      componentWillMount() {
         axios.post('http://localhost:1111/proserver')
           .then((response) => {
             if(response.data.success) {

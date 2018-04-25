@@ -30,7 +30,7 @@ class Errortable extends Component {
         height: '500px',
         value: 1,
       };
-      componentDidMount() {
+      componentWillMount() {
         axios.post('http://localhost:1111/errorlamp')
           .then((response) => {
             if(response.data.success === true) {

@@ -2,6 +2,7 @@ package com.jin.road.Controller;
 
 import com.jin.road.Mapper.ErrorLampMapper;
 import com.jin.road.Mapper.LampRecordMapper;
+import com.jin.road.Mapper.WorkMissionMapper;
 import com.jin.road.auth.Auth;
 import com.jin.road.auth.AuthAspect;
 
@@ -29,6 +30,9 @@ public class ErrorLampController {
     
     @Autowired
     LampRecordMapper lampRecordMapper;
+    
+    @Autowired
+    WorkMissionMapper workMissionMapper;
 
     @Auth
     @RequestMapping(value = "/errorlamp")
@@ -47,6 +51,7 @@ public class ErrorLampController {
     	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
     	String date = df.format(new Date());
     	lampRecordMapper.record(lampid, opercode, errortime, date, "处理");
+    	workMissionMapper.report(lampid, fixcode, 1, date);
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
         return map;

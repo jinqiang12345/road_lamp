@@ -37,7 +37,7 @@ class Errortable extends Component {
         fixcode:'',
         fixname:''
       };
-      componentDidMount() {
+      componentWillMount() {
         axios.post('http://localhost:1111/fixlamp')
           .then((response) => {
             if(response.data.success === true) {

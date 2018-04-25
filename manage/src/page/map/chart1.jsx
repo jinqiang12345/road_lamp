@@ -10,7 +10,7 @@ class Chart1 extends Component {
     state = {
         data: []
     }
-    componentDidMount() {
+    componentWillMount() {
         axios.post('http://localhost:1111/data')
           .then((response) => {
             if(response.data.success) {

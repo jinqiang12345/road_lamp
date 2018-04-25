@@ -33,7 +33,7 @@ class Errortable extends Component {
         opercode: '',
         opername: ''
       };
-      componentDidMount() {
+      componentWillMount() {
         axios.post('http://localhost:1111/lamprecord')
           .then((response) => {
             if(response.data.success === true) {

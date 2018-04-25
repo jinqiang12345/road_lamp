@@ -19,6 +19,7 @@ import ContentLink from 'material-ui/svg-icons/action/settings';
 import Divider from 'material-ui/Divider';
 import ContentCopy from 'material-ui/svg-icons/action/help';
 import Delete from 'material-ui/svg-icons/action/exit-to-app';
+import Airplay from 'material-ui/svg-icons/av/airplay';
 import Chart from 'material-ui/svg-icons/editor/insert-chart';
 import Error from 'material-ui/svg-icons/alert/error';
 import Build from 'material-ui/svg-icons/action/build';
@@ -97,7 +98,7 @@ class M extends Component {
               open={this.state.open}
               onRequestChange={(open) => this.setState({open})}
             >
-              <MenuItem onClick={() => {history.push('/control');this.setState({open:false})}} leftIcon={<Chart />}>实时监控信息</MenuItem>
+              <MenuItem onClick={() => {history.push('/control');this.setState({open:false})}} leftIcon={<Airplay />}>实时监控信息</MenuItem>
               <MenuItem onClick={() => {history.push('/chart');this.setState({open:false})}} leftIcon={<Chart />}>路灯监控信息</MenuItem>
               <MenuItem onClick={() => {history.push('/errortable');this.setState({open:false})}} leftIcon={<Error />}>故障路灯处理</MenuItem>
               <MenuItem onClick={() => {history.push('/fixtable');this.setState({open:false})}} leftIcon={<Build />}>维修任务记录</MenuItem>

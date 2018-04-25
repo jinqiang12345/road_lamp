@@ -9,4 +9,11 @@
         ON loguser.code like user.code
         WHERE logname like #{logname}
     </select>
+    <select id="findWorkByLogname" resultType="com.jin.road.Dao.RoadUser">
+        SELECT loginwork.id, loginwork.logname, loginwork.pwd, loginwork.code , user.name, user.phone, user.state, user.remark
+        FROM loginwork
+        LEFT JOIN user
+        ON loginwork.code like user.code
+        WHERE logname like #{logname}
+    </select>
 </mapper>

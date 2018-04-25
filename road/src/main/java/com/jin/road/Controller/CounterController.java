@@ -25,4 +25,12 @@ public class CounterController {
 		map.put("countrecord", countLampMapper.getrecord());
 		return map;
 	}
+	
+	@RequestMapping("/position")
+	public Map<String, Object> position() throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("success", true);
+		map.put("data", countLampMapper.getposition());
+		return map;
+	}
 }

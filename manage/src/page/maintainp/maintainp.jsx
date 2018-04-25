@@ -32,7 +32,7 @@ class Errortable extends Component {
         code: '',
         name: ''
       };
-      componentDidMount() {
+      componentWillMount() {
         let fd = new FormData();
         fd.append("position", "维修工");
         axios.post('http://localhost:1111/man', fd)

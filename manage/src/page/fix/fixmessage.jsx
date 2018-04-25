@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { message } from 'antd';
 import {
     Table,
     TableBody,
@@ -10,6 +11,7 @@ import {
   } from 'material-ui/Table';
   import RaisedButton from 'material-ui/RaisedButton';
   import './fixtable.css';
+  import axios from 'axios';
 class fixmessage extends Component {
     state = {
         fixedHeader: true,
@@ -22,8 +24,28 @@ class fixmessage extends Component {
         deselectOnClickaway: false,
         showCheckboxes: false,
         height: '410px',
-        value: 1
+        disable: false
       };
+      setfix = () => {
+        let fd = new FormData();
+          fd.append("lampid", this.props.fix.lampid);
+          fd.append("opercode", this.props.login.code);
+          fd.append("errortime", this.props.fix.errortime);
+          fd.append("fixcode", this.props.fix.fixcode)
+          axios.post('http://localhost:1111/remind', fd)
+            .then((response) => {
+              if(response.data.success === true) {
+                  message.success('提醒成功！');
+                  this.setState({disable: true});
+              } else {
+                  message.error('提醒失败！');
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+              message.error('网络连接失败！');
+            }); 
+      }
       handleChange = (event, index, value) => this.setState({value});
     
       render() {
@@ -85,7 +107,7 @@ class fixmessage extends Component {
               </TableBody>
             </Table>
             <div style={{position: 'relative', width: '100%', height: '80px'}}>
-                <RaisedButton label="提醒" primary={true} style={{position: 'absolute', top: '30px', right: '10px'}}/>
+                <RaisedButton label="提醒" primary={true} style={{position: 'absolute', top: '30px', right: '10px'}} onClick={this.setfix} disabled={this.state.disable}/>
             </div>
           </div>
         );
@@ -94,7 +116,8 @@ class fixmessage extends Component {
 
 function select(state) {
   return {
-    fix: state.fix
+    fix: state.fix,
+    login: state.login
   }
 }
 export default connect(select)(fixmessage);

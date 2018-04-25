@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.jin.road.Mapper.WorkMissionMapper" > 
+	<select id="findMission" resultType="com.jin.road.Dao.WorkMission">
+        SELECT workmission.id, workmission.lampid, workmission.time, workmission.type, lamp.addr, lamp.errortime, proserver.name AS proname 
+        FROM workmission
+        LEFT JOIN lamp
+        ON workmission.lampid like lamp.lampid
+        LEFT JOIN proserver
+        ON lamp.procode like proserver.procode
+        WHERE workmission.fixcode like #{fixcode}
+        ORDER BY workmission.id DESC
+    </select>
+</mapper>

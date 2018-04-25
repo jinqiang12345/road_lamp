@@ -2,6 +2,7 @@ package com.jin.road.Controller;
 
 import com.jin.road.Mapper.FixLampMapper;
 import com.jin.road.Mapper.LampRecordMapper;
+import com.jin.road.Mapper.WorkMissionMapper;
 import com.jin.road.auth.Auth;
 import com.mysql.fabric.Response;
 
@@ -30,6 +31,9 @@ public class FixLampController {
     
     @Autowired
     LampRecordMapper lampRecordMapper;
+    
+    @Autowired
+    WorkMissionMapper workMissionMapper;
 
     @Auth
     @RequestMapping(value = "/fixlamp")
@@ -42,12 +46,12 @@ public class FixLampController {
     
     @Auth
     @Transactional
-    @RequestMapping(value = "/fix", method = RequestMethod.POST)
-    public Map<String, Object> fix(@RequestParam String lampid, @RequestParam String fixcode, @RequestParam String errortime) throws Exception {
-    	fixLampMapper.fix(lampid);
+    @RequestMapping(value = "/remind", method = RequestMethod.POST)
+    public Map<String, Object> remind(@RequestParam String lampid, @RequestParam String fixcode, @RequestParam String opercode, @RequestParam String errortime) throws Exception {
     	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
     	String date = df.format(new Date());
-    	lampRecordMapper.record(lampid, fixcode,errortime, date, "维修");
+    	lampRecordMapper.record(lampid, opercode,errortime, date, "提醒");
+    	workMissionMapper.report(lampid, fixcode, 2, date);
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
         return map;

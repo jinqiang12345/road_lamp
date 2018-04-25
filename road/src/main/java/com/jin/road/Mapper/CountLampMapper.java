@@ -1,5 +1,6 @@
 package com.jin.road.Mapper;
 
+import com.jin.road.Dao.Position;
 import com.jin.road.Dao.Record;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -22,4 +23,7 @@ public interface CountLampMapper {
     
     @Select("SELECT * FROM COUNTRECORD ORDER BY ID DESC LIMIT 6")
     List<Record> getrecord();
+    
+    @Select("SELECT LONGITUDE, LATITUDE FROM LAMP")
+    List<Position> getposition();
 }
