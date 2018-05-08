@@ -7,9 +7,14 @@ import {
 } from 'react-router';
 import history from '../../history';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Avatar from 'material-ui/Avatar';
 import AppBar from 'material-ui/AppBar';
+import Popover from 'material-ui/Popover/Popover';
+import {Menu, MenuItem} from 'material-ui/Menu';
+import Notification from 'material-ui/svg-icons/social/notifications-none';
+import Event from 'material-ui/svg-icons/notification/event-note';
+import Palette from 'material-ui/svg-icons/image/palette';
 import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
 import RemoveRedEye from 'material-ui/svg-icons/image/remove-red-eye';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
@@ -45,7 +50,8 @@ import { loginout, removeerror, removefix } from '../../actions';
 class M extends Component {
 
   state = {
-    open: false
+    open: false,
+    l: false
   }
   componentDidMount() {
     if(this.props.login.logname === undefined) {
@@ -55,6 +61,22 @@ class M extends Component {
   handleToggle = () => this.setState({open: !this.state.open});
 
   handleClose = () => this.setState({open: false});
+
+  handleClick = (event) => {
+    // This prevents ghost click.
+    event.preventDefault();
+
+    this.setState({
+      l: true,
+      anchorEl: event.currentTarget,
+    });
+  };
+
+  handleRequestClose = () => {
+    this.setState({
+      l: false,
+    });
+  };
 
   loginout = () => {
     this.props.dispatch(removeerror());
@@ -87,11 +109,77 @@ class M extends Component {
         <MuiThemeProvider>
           <div>
             <AppBar
-              title="远程路灯监控管理系统"
-              style={{width: '100%'}}
+              title="城市路灯远程监控系统"
+              style={{zIndex: '5', width: '100%'}}
               onLeftIconButtonClick={() => this.setState({open: true})}
-              iconElementRight={<Logged />}
             />
+            <div style={{position: 'absolute', top: '8px', right: '20px', zIndex: '1000', width: '300px', height: '48px'}}>
+              <span style={{position: 'absolute', top: '9px', right: '150px'}} onClick={this.handleClick}>
+              <Avatar
+                src="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/9f6f847c.jpg"
+                size={35}
+                style={{marginRight: '10px', cursor: 'pointer'}}
+              />
+              <span style={{marginRight: '10px', color: '#fff', cursor: 'pointer'}}>{this.props.login.logname}</span>
+              </span>
+              <Popover
+                style={{width: '224px'}}
+                open={this.state.l}
+                anchorEl={this.state.anchorEl}
+                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                onRequestClose={this.handleRequestClose}
+              >
+                <div>
+                  <div style={{width: '100%', background: 'rgb(0, 188, 212)', height: '81px', textAlign: 'center', padding: '23px 0'}}>
+                    <Avatar
+                      src="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/9f6f847c.jpg"
+                      size={35}
+                      style={{marginRight: '10px', cursor: 'pointer'}}
+                    />
+                    <span style={{color: '#fff', cursor: 'pointer'}}>{this.props.login.logname}</span>
+                  </div>
+                  <div style={{width: '100%', height: '40px', textAlign: 'center', padding: '5px 0'}}>
+                    <Avatar
+                      src="https://pan.baidu.com/box-static/disk-header/header/img/capacity-5t.png?t=1521599641001"
+                      size={30}
+                      style={{marginRight: '10px', cursor: 'pointer'}}
+                    />
+                    <Avatar
+                      src="https://pan.baidu.com/box-static/disk-header/header/img/download-speed-raising.png?t=1521599641001"
+                      size={30}
+                      style={{marginRight: '10px', cursor: 'pointer'}}
+                    />
+                    <Avatar
+                      src="https://pan.baidu.com/box-static/disk-header/header/img/cloud-unzip.png?t=1521599641001"
+                      size={30}
+                      style={{marginRight: '10px', cursor: 'pointer'}}
+                    />
+                    <Avatar
+                      src="https://pan.baidu.com/box-static/disk-header/header/img/file-limit-5000@2x.png?t=1521599641001"
+                      size={30}
+                      style={{marginRight: '10px', cursor: 'pointer'}}
+                    />
+                    <Avatar
+                      src="https://pan.baidu.com/box-static/disk-header/header/img/know-more@2x.png?t=1521599641001"
+                      size={30}
+                      style={{marginRight: '10px', cursor: 'pointer'}}
+                    />
+                  </div>
+                  <Menu>
+                    <MenuItem primaryText="个人资料" onClick={() => {history.push('/user');this.setState({l: false})}}/>
+                    <MenuItem primaryText="帮助中心" />
+                    <MenuItem primaryText="修改密码" onClick={() => {history.push('/changepwd');this.setState({l: false})}}/>
+                    <MenuItem primaryText="退出" onClick={this.loginout}/>
+                  </Menu>
+                </div>
+              </Popover>
+              <span style={{position: 'absolute', top: '0px', right: '0px'}}>
+              <IconButton iconStyle={{color: '#fff'}}><Notification /></IconButton>
+              <IconButton iconStyle={{color: '#fff'}}><Event /></IconButton>
+              <IconButton iconStyle={{color: '#fff'}}><Palette /></IconButton>
+              </span>
+            </div>
             <Drawer
               docked={false}
               width={200}

@@ -107,7 +107,7 @@ class Errortable extends Component {
                 </FloatingActionButton>
             </div>
             <S data={searchdata} open={this.sss} close={this.closesearch} search={this.state.search}/>
-            <div className="title">故障路灯信息</div>
+            <div className="title">维修任务记录</div>
             <Table
               height={this.state.height}
               fixedHeader={this.state.fixedHeader}
