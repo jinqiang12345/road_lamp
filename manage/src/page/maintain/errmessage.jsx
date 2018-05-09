@@ -59,7 +59,7 @@ class errmessage extends Component {
           axios.post('http://localhost:1111/report', fd)
             .then((response) => {
               if(response.data.success === true) {
-                  message.error('申请维修成功！');
+                  message.success('申请维修成功！');
                   history.goBack();
               } else {
                   message.error('申请维修失败！');
