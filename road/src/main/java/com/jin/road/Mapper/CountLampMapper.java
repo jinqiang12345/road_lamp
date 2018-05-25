@@ -2,7 +2,10 @@ package com.jin.road.Mapper;
 
 import com.jin.road.Dao.Position;
 import com.jin.road.Dao.Record;
+
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +26,9 @@ public interface CountLampMapper {
     
     @Select("SELECT * FROM COUNTRECORD ORDER BY ID DESC LIMIT 6")
     List<Record> getrecord();
+    
+    @Insert("INSERT INTO COUNTRECORD(ERROR, FIX, OK, TIME) VALUES(#{error,jdbcType=INTEGER}, #{fix,jdbcType=INTEGER}, #{ok,jdbcType=INTEGER}, #{time,jdbcType=VARCHAR})")
+    List<Record> setrecord(@Param("error") int error, @Param("fix") int fix, @Param("ok") int ok, @Param("time") String time);
     
     @Select("SELECT LONGITUDE, LATITUDE FROM LAMP")
     List<Position> getposition();
